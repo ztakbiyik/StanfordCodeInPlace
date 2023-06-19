@@ -1,0 +1,68 @@
+#Access more here:
+#https://codeinplace.stanford.edu/cip3/share/DwwJZWAGsM5o8Kjx8txi
+
+from graphics import Canvas
+import time
+
+CANVAS_WIDTH = 500
+CANVAS_HEIGHT = 500
+SQUARE_SIZE = 120
+SPACING = 30
+PAUSE_TIME = 1.5/2
+
+def main():
+    canvas = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
+    
+    # calculate the size of each square based on the number of squares per row and column
+    squares_per_row = 3
+    squares_per_column = 3
+    
+    total_width = (SQUARE_SIZE * squares_per_row) + (SPACING * (squares_per_row - 1))
+    total_height = (SQUARE_SIZE * squares_per_column) + (SPACING * (squares_per_column - 1))
+    
+    start_x = (CANVAS_WIDTH - total_width) / 2
+    start_y = (CANVAS_HEIGHT - total_height) / 2
+    
+    # define a list of colors
+    colors = ['blue', 'red', 'green', 'yellow', 'orange', 'purple', 'black', 'brown', 'magenta']
+    
+    for row in range(squares_per_column):
+        for col in range(squares_per_row):
+            # calculate the left, top, right, and bottom coordinates of each square
+            left_x = start_x + (col * (SQUARE_SIZE + SPACING))
+            top_y = start_y + (row * (SQUARE_SIZE + SPACING))
+            right_x = left_x + SQUARE_SIZE
+            bottom_y = top_y + SQUARE_SIZE
+            
+            # select a color from the list based on the index
+            color = colors[row * squares_per_row + col % len(colors)]
+            
+            # draw each square with a different color
+            canvas.create_rectangle(left_x, top_y, right_x, bottom_y, color)
+    while True:
+        mouse_x = canvas.get_mouse_x()
+        mouse_y = canvas.get_mouse_y()
+        if 40 <= mouse_x <= 160 and 40 <= mouse_y <= 160:
+            print("blue")
+        elif 190 <= mouse_x <= 310 and 40 <= mouse_y <= 160:
+            print("red")
+        elif 340 <= mouse_x <= 460 and 40 <= mouse_y <= 160:
+            print("green")
+        elif 40 <= mouse_x <= 160 and 190 <= mouse_y <= 310:
+            print("yellow")
+        elif 190 <= mouse_x <= 310 and 190 <= mouse_y <= 310:
+            print("orange")
+        elif 340 <= mouse_x <= 460 and 190 <= mouse_y <= 310:
+            print("purple")
+        elif 40 <= mouse_x <= 160 and 340 <= mouse_y <= 460:
+            print("black")
+        elif 190 <= mouse_x <= 310 and 340 <= mouse_y <= 460:
+            print("brown")
+        elif 340 <= mouse_x <= 460 and 340 <= mouse_y <= 460:
+            print("pink")
+        else:
+            print("white")
+        time.sleep(PAUSE_TIME)
+
+if __name__ == '__main__':
+    main()
